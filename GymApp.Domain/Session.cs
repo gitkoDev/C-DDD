@@ -1,26 +1,29 @@
 using ErrorOr;
+using GymApp.Domain.Errors;
 
 namespace GymApp.Domain;
 
 public class Session
 {
-    private readonly Guid _sessionId;
+    public Guid Id { get; }
+    
+    public DateOnly Date { get; }
+    
+    public TimeRange Time { get; }
+
+    
     private readonly Guid _trainerId;
     private readonly List<Guid> _participantIds = [];
-    private readonly DateOnly _date;
-    private readonly TimeOnly _startTime;
-    private readonly TimeOnly _endTime;
-
+    
     private readonly int _maxParticipants;
 
-    public Session(DateOnly date, TimeOnly startTime, TimeOnly endTime, int maxParticipants, Guid trainerId, Guid? id = null)
+    public Session(DateOnly date, TimeRange time, int maxParticipants, Guid trainerId, Guid? id = null)
     {
-        _sessionId = id ?? Guid.NewGuid();
+        Id = id ?? Guid.NewGuid();
         _maxParticipants = maxParticipants;
         _trainerId = trainerId;
-        _date = date;
-        _startTime = startTime;
-        _endTime = endTime;
+        Date = date;
+        Time = time;
     }
 
     public ErrorOr<Success> ReserveSpot(Participant participant)
@@ -35,18 +38,21 @@ public class Session
 
     public ErrorOr<Success> CancelReservation(Participant participant, IDateTimeProvider dateTimeProvider)
     {
+        if (!_participantIds.Contains(participant.Id))
+            return SessionErrors.ReservationNotFound;
+        
         if (IsTooCloseToSession(dateTimeProvider.UtcNow))
             return SessionErrors.CancellationTooCloseToSessionTime;
-
+    
         if (!_participantIds.Remove(participant.Id))
             return SessionErrors.ReservationNotFound;
-
+    
         return Result.Success;
     }
 
     private bool IsTooCloseToSession(DateTime utcNow)
     {
         const int minHours = 24;
-        return (_date.ToDateTime(_startTime) - utcNow).TotalHours < minHours;
+        return (Date.ToDateTime(Time.Start) - utcNow).TotalHours < minHours;
     }
 }

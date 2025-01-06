@@ -1,20 +1,20 @@
-using GymApp.Domain.UnitTests.Sessions;
 using FluentAssertions;
+using GymApp.Domain.Errors;
 using GymApp.Domain.UnitTests.TestConstants;
 using GymApp.Domain.UnitTests.TestUtils.Participants;
 using GymApp.Domain.UnitTests.TestUtils.Services;
+using GymApp.Domain.UnitTests.TestUtils.Sessions;
 
 namespace GymApp.Domain.UnitTests;
 
 public class SessionTests
 {
     [Fact]
-    public void ReserveSpot_WhenNoMoreRoom_ShouldFailReservation()
+    public void ReserveSpot_WhenNoMoreRoom_ShouldFail()
     {
         var session = SessionFactory.CreateSession(            
             date: Constants.Session.Date,
-            startTime: Constants.Session.StartTime,
-            endTime: Constants.Session.EndTime);
+            time: Constants.Session.Time);
         var participant1 = ParticipantFactory.CreateParticipant(id: Guid.NewGuid(), userId: Guid.NewGuid());
         var participant2 = ParticipantFactory.CreateParticipant(id: Guid.NewGuid(), userId: Guid.NewGuid());
 
@@ -31,8 +31,7 @@ public class SessionTests
     {
         var session = SessionFactory.CreateSession(
             date: Constants.Session.Date,
-            startTime: Constants.Session.StartTime,
-            endTime: Constants.Session.EndTime);
+            time: Constants.Session.Time);
         var participant = ParticipantFactory.CreateParticipant();
         var cancellationDateTime = Constants.Session.Date.ToDateTime(TimeOnly.MinValue);
         
@@ -49,8 +48,7 @@ public class SessionTests
     {
         var session = SessionFactory.CreateSession(
             date: Constants.Session.Date.AddDays(2),
-            startTime: Constants.Session.StartTime,
-            endTime: Constants.Session.EndTime);
+            time: Constants.Session.Time);
         var participant = ParticipantFactory.CreateParticipant();
         var cancellationDateTime = Constants.Session.Date.ToDateTime(TimeOnly.MinValue);
         

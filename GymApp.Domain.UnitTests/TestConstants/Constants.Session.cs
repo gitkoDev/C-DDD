@@ -8,10 +8,9 @@ public static partial class Constants
 
         public const int MaxParticipants = 1;
 
-        public static readonly DateOnly Date = new DateOnly();
-
-        public static readonly TimeOnly StartTime = new TimeOnly();
-        
-        public static readonly TimeOnly EndTime = new TimeOnly();
+        public static readonly DateOnly Date = new();
+        public static readonly TimeRange Time = new(
+            TimeOnly.MinValue.AddHours(8),
+            TimeOnly.MinValue.AddHours(9));
     }
 }
