@@ -1,8 +1,8 @@
 using ErrorOr;
 
-namespace GymApp.Domain.Errors;
+namespace GymApp.Domain.RoomAggregate;
 
-public class RoomErrors
+public static class RoomErrors
 {
     public static readonly Error SessionExists = Error.Validation(
         "Room.SessionExists",

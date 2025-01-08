@@ -1,8 +1,8 @@
 using ErrorOr;
 
-namespace GymApp.Domain.Errors;
+namespace GymApp.Domain.SubscriptionAggregate;
 
-public class SubscriptionErrors
+public static class SubscriptionErrors
 {
     public static readonly Error GymLimitExceeded = Error.Validation(
         code: "Subscription.GymsLimitExceeded",

@@ -1,24 +1,19 @@
 using ErrorOr;
-using GymApp.Domain.Errors;
-using OneOf.Types;
+using GymApp.Domain.Common;
+using GymApp.Domain.Common.Entities;
+using GymApp.Domain.SessionAggregate;
 using Success = ErrorOr.Success;
 
-namespace GymApp.Domain;
+namespace GymApp.Domain.TrainerAggregate;
 
-public class Trainer
+public class Trainer(Guid? id = null) : AggregateRoot(id: id ?? Guid.NewGuid())
 {
     private readonly Schedule _schedule = Schedule.Empty();
-    
-    private readonly Guid _id;
+
     private readonly Guid _userId;
+    
     private readonly List<Guid> _sessionIds = [];
-
-    public Trainer(Guid id)
-    {
-        _id = id;
-    }
-
-
+    
     public ErrorOr<Success> AddSessionToSchedule(Session session)
     {
         if (_sessionIds.Any(id => id == session.Id))

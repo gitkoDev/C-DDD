@@ -1,5 +1,5 @@
 using FluentAssertions;
-using GymApp.Domain.Errors;
+using GymApp.Domain.GymAggregate;
 using GymApp.Domain.UnitTests.TestUtils.Gyms;
 using GymApp.Domain.UnitTests.TestUtils.Rooms;
 

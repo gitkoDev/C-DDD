@@ -1,29 +1,22 @@
 using ErrorOr;
-using GymApp.Domain.Errors;
+using GymApp.Domain.Common;
+using GymApp.Domain.Common.Entities;
+using GymApp.Domain.SessionAggregate;
 
-namespace GymApp.Domain;
+namespace GymApp.Domain.RoomAggregate;
 
-public class Room
+public class Room(int maxDailySessions, Guid? id = null) : AggregateRoot(id: id ?? Guid.NewGuid())
 {
-    public Guid Id { get; }
     private readonly List<Guid> _sessionIds = [];
     
     private readonly Schedule _schedule = Schedule.Empty();
-
-    private readonly int _maxDailySessions;
-
-    public Room(int maxDailySessions, Guid? id = null)
-    {
-        _maxDailySessions = maxDailySessions;
-        Id = id ?? Guid.NewGuid();
-    }
 
     public ErrorOr<Success> ScheduleSession(Session session)
     {
         if (_sessionIds.Any(id => id == session.Id))
             return RoomErrors.SessionExists;
 
-        if (_sessionIds.Count >= _maxDailySessions)
+        if (_sessionIds.Count >= maxDailySessions)
             return RoomErrors.SessionsLimitExceeded;
         
         var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);

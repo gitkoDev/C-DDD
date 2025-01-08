@@ -1,3 +1,5 @@
+using GymApp.Domain.TrainerAggregate;
+
 namespace GymApp.Domain.UnitTests.TestUtils.Trainers;
 
 public static class TrainerFactory

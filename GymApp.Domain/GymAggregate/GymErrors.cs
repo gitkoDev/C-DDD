@@ -1,8 +1,8 @@
 using ErrorOr;
 
-namespace GymApp.Domain.Errors;
+namespace GymApp.Domain.GymAggregate;
 
-public class GymErrors
+public static class GymErrors
 {
     public static readonly Error RoomExists = Error.Conflict(
         "Gym.RoomExists",

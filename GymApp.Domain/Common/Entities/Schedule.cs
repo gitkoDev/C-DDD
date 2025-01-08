@@ -1,19 +1,14 @@
 using ErrorOr;
-using GymApp.Domain.Errors;
+using GymApp.Domain.Common.ValueObjects;
+using GymApp.Domain.SessionAggregate;
 
-namespace GymApp.Domain;
+namespace GymApp.Domain.Common.Entities;
 
-public class Schedule
+public class Schedule(Guid? id = null, Dictionary<DateOnly, List<TimeRange>>? calendar = null) : Entity(id: id ?? Guid.NewGuid())
 {
-    private readonly Guid _id;
+    private readonly Guid _id = id ?? Guid.NewGuid();
 
-    private readonly Dictionary<DateOnly, List<TimeRange>> _calendar;
-
-    public Schedule(Guid? id = null, Dictionary<DateOnly, List<TimeRange>>? calendar = null)
-    {
-        _id = id ?? Guid.NewGuid();
-        _calendar = calendar ?? [];
-    }
+    private readonly Dictionary<DateOnly, List<TimeRange>> _calendar = calendar ?? [];
 
     public ErrorOr<Success> BookTimeSlot(DateOnly date, TimeRange time)
     {

@@ -1,3 +1,4 @@
+using GymApp.Domain.RoomAggregate;
 using GymApp.Domain.UnitTests.TestConstants;
 
 namespace GymApp.Domain.UnitTests.TestUtils.Rooms;

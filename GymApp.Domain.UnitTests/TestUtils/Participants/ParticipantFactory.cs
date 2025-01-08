@@ -1,3 +1,4 @@
+using GymApp.Domain.ParticipantAggregate;
 using GymApp.Domain.UnitTests.TestConstants;
 
 namespace GymApp.Domain.UnitTests.TestUtils.Participants;

@@ -1,3 +1,6 @@
+using GymApp.Domain.Common.ValueObjects;
+using GymApp.Domain.SessionAggregate;
+
 namespace GymApp.Domain.UnitTests.TestConstants;
 
 public static partial class Constants

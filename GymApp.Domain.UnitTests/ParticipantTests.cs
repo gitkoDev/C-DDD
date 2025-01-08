@@ -1,5 +1,7 @@
 using FluentAssertions;
-using GymApp.Domain.Errors;
+using GymApp.Domain.Common.ValueObjects;
+using GymApp.Domain.ParticipantAggregate;
+using GymApp.Domain.SessionAggregate;
 using GymApp.Domain.UnitTests.TestUtils.Common;
 using GymApp.Domain.UnitTests.TestUtils.Participants;
 using GymApp.Domain.UnitTests.TestUtils.Services;
@@ -15,7 +17,8 @@ public class ParticipantTests
     {
         var participant = ParticipantFactory.CreateParticipant();
 
-        var session = SessionFactory.CreateSession();
+        var sessionStartDate = DateOnly.FromDateTime(DateTime.Today.AddDays(5));
+        var session = SessionFactory.CreateSession(date: sessionStartDate);
         var cancelNotExistingSessionResult = session.CancelReservation(participant, new TestDateTimeProvider());
 
         cancelNotExistingSessionResult.IsError.Should().BeTrue();

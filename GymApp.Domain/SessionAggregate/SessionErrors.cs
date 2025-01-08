@@ -1,6 +1,7 @@
 using ErrorOr;
+using GymApp.Domain.Common.ValueObjects;
 
-namespace GymApp.Domain.Errors;
+namespace GymApp.Domain.SessionAggregate;
 
 public static class SessionErrors
 {
@@ -19,4 +20,10 @@ public static class SessionErrors
     public static readonly Error OverlappingSessions = Error.Conflict(
         code: "Session.OverlappingSessions",
         description: "Another session reservation exists that overlaps with this one");
+
+    public static readonly Error StartAndEndNotOnSameDate = Error.Validation(
+        "Session.StartAndEndNotOnSameDate", description: "Start and end date should be the same");
+
+    public static readonly Error StartTimeEarlierOrEqualToEndTime = Error.Validation(
+        code: "Session.StartTimeEarlierOrEqualToEndTime", description: "Start date should be earlier than end time");
 }

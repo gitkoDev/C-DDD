@@ -1,5 +1,5 @@
 using FluentAssertions;
-using GymApp.Domain.Errors;
+using GymApp.Domain.TrainerAggregate;
 using GymApp.Domain.UnitTests.TestUtils.Common;
 using GymApp.Domain.UnitTests.TestUtils.Sessions;
 using GymApp.Domain.UnitTests.TestUtils.Trainers;

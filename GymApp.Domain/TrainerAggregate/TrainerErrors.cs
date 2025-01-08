@@ -1,8 +1,8 @@
 using ErrorOr;
 
-namespace GymApp.Domain.Errors;
+namespace GymApp.Domain.TrainerAggregate;
 
-public class TrainerErrors
+public static class TrainerErrors
 {
     public static readonly Error OverlappingSessions = Error.Validation(
         code: "Trainer.OverlappingSessions",

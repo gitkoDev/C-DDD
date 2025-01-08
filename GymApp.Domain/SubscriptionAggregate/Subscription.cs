@@ -1,19 +1,18 @@
 using ErrorOr;
-using GymApp.Domain.Errors;
+using GymApp.Domain.Common;
+using GymApp.Domain.GymAggregate;
 
-namespace GymApp.Domain;
+namespace GymApp.Domain.SubscriptionAggregate;
 
-public class Subscription
+public class Subscription : AggregateRoot
 {
-    private readonly Guid _id;
-    private readonly List<Guid> _gymIds = [];
+    private readonly List<Guid> _gymIds = []; 
     private readonly SubscriptionType _subscriptionType;
     
     private readonly int _maxGyms;
     
-    public Subscription(SubscriptionType subscriptionType, Guid? id = null)
+    public Subscription(SubscriptionType subscriptionType, Guid? id = null) : base(id: id ?? Guid.NewGuid())
     {
-        _id = id ?? Guid.NewGuid();
         _subscriptionType = subscriptionType;
         _maxGyms = GetMaxGyms();
     }

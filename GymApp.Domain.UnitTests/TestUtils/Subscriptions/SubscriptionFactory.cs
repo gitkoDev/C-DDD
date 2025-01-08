@@ -1,3 +1,5 @@
+using GymApp.Domain.SubscriptionAggregate;
+
 namespace GymApp.Domain.UnitTests.TestUtils.Subscriptions;
 
 public static class SubscriptionFactory

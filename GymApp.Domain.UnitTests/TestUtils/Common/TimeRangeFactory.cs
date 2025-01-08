@@ -1,3 +1,5 @@
+using GymApp.Domain.Common.ValueObjects;
+using GymApp.Domain.SessionAggregate;
 using Throw;
 
 namespace GymApp.Domain.UnitTests.TestUtils.Common;
