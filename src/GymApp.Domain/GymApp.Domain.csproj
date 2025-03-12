@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Ardalis.SmartEnum" Version="8.2.0" />
+      <PackageReference Include="ErrorOr" Version="2.0.1" />
+      <PackageReference Include="Throw" Version="1.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="MediatR.Contracts">
+        <HintPath>..\..\..\..\..\..\.nuget\packages\mediatr.contracts\2.0.1\lib\netstandard2.0\MediatR.Contracts.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>
